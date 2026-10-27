@@ -2,7 +2,9 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 import { users } from '../../test-data/users.js';
 
-test.describe('Regression Tests - Checkout Validation', () => {
+test.describe('Regression Tests - Checkout Validation', {
+  tag: ['@regression', '@checkout'],
+}, () => {
   test('TC-CHECK-002: checkout requires customer information', async ({
     loginPage,
     inventoryPage,

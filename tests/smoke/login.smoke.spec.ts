@@ -2,7 +2,9 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 import { users } from '../../test-data/users.js';
 
-test.describe('Smoke Tests - Login', () => {
+test.describe('Smoke Tests - Login', {
+  tag: ['@smoke', '@auth'],
+}, () => {
   test('TC-AUTH-001: valid user can log in', async ({
     page,
     loginPage,
@@ -15,7 +17,6 @@ test.describe('Smoke Tests - Login', () => {
     );
 
     await inventoryPage.expectInventoryLoaded();
-
     await expect(page).toHaveURL(/inventory\.html/);
   });
 });

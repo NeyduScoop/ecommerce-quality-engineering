@@ -2,7 +2,9 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 import { users } from '../../test-data/users.js';
 
-test.describe('Smoke Tests - Inventory', () => {
+test.describe('Smoke Tests - Inventory', {
+  tag: ['@smoke', '@inventory'],
+}, () => {
   test('TC-INV-001: inventory page loads after login', async ({
     page,
     loginPage,

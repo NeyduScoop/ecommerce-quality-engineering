@@ -2,7 +2,9 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 import { users } from '../../test-data/users.js';
 
-test.describe('Regression Tests - Shopping Cart', () => {
+test.describe('Regression Tests - Shopping Cart', {
+  tag: ['@regression', '@cart'],
+}, () => {
   test.beforeEach(async ({ loginPage, inventoryPage }) => {
     await loginPage.goto();
     await loginPage.login(

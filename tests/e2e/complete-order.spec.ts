@@ -2,7 +2,9 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 import { users } from '../../test-data/users.js';
 
-test.describe('E2E - Complete Order Journey', () => {
+test.describe('E2E Tests - Complete Order', {
+  tag: ['@e2e', '@checkout'],
+}, () => {
   test('TC-ORDER-006: user can complete a valid order', async ({
     loginPage,
     inventoryPage,

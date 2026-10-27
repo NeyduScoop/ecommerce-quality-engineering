@@ -2,7 +2,9 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 import { users } from '../../test-data/users.js';
 
-test.describe('Regression Tests - Product Sorting', () => {
+test.describe('Regression Tests - Product Sorting', {
+  tag: ['@regression', '@sorting'],
+}, () => {
   test('TC-SORT-003: products can be sorted by price low to high', async ({
     loginPage,
     inventoryPage,
