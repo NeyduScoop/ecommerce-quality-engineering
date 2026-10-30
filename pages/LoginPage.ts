@@ -17,8 +17,14 @@ export class LoginPage {
   }
 
   async goto(): Promise<void> {
-    await this.page.goto('/');
-  }
+    await this.page.goto('/', {
+        waitUntil: 'domcontentloaded',
+    });
+
+    await this.page.locator('[data-test="username"]').waitFor({
+        state: 'visible',
+    });
+}
 
   async login(username: string, password: string): Promise<void> {
     await this.usernameInput.fill(username);
