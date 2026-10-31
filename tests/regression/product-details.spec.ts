@@ -14,18 +14,28 @@ test.describe('Product details', { tag: ['@regression', '@inventory'] }, () => {
   });
 
   test('TC-DETAIL-002: add product from details view', async ({ page }) => {
-    await page.locator('.inventory_item_name').first().click();
-    await page.getByRole('button', { name: 'Add to cart' }).click();
+    const productName = page.locator('.inventory_item_name').first();
+    await productName.click();
+    await expect(page).toHaveURL(/inventory-item\.html/);
+    await expect(page.locator('.inventory_details_name')).toBeVisible();
+    const addToCartButton = page.getByRole('button', {name: 'Add to cart',});
+    await expect(addToCartButton).toBeVisible();
+    await addToCartButton.click();
     await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
     await expect(page.getByRole('button', { name: 'Remove' })).toBeVisible();
   });
 
   test('TC-DETAIL-003: cart state survives returning to inventory', async ({ page }) => {
-    await page.locator('.inventory_item_name').first().click();
+    const productName = page.locator('.inventory_item_name').first();
+    await productName.click();
+    await expect(page).toHaveURL(/inventory-item\.html/);
+    await expect(page.locator('.inventory_details_name')).toBeVisible();
     await page.getByRole('button', { name: 'Add to cart' }).click();
-    await page.getByRole('button', { name: 'Back to products' }).click();
     await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
-  });
+    await page.getByRole('button', { name: 'Back to products' }).click();
+    await expect(page).toHaveURL(/inventory\.html/);
+    await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
+ });
 
   test('TC-DETAIL-004: product details controls are keyboard accessible', async ({ page }) => {
     const productDetails = page.getByRole('button', {name: 'View details for Sauce Labs Backpack'}).first();
@@ -36,3 +46,4 @@ test.describe('Product details', { tag: ['@regression', '@inventory'] }, () => {
     await expect(page.getByRole('button', { name: 'Add to cart' })).toBeVisible();
   });
 });
+  

@@ -51,11 +51,14 @@ test.describe('Product sorting', { tag: ['@regression', '@sorting'] }, () => {
     expect(prices.every((price, i) => i === 0 || prices[i - 1]! <= price)).toBeTruthy();
   });
 
+  
   test('TC-REG-003: sorting does not change selected cart product identity', async ({ page }) => {
     const selectedName = await addProductByIndex(page, 0);
     await page.locator('[data-test="product-sort-container"]').selectOption('za');
     await page.locator('.shopping_cart_link').click();
-    await expect(page.locator('.inventory_item_name, .cart_item .inventory_item_name')).toContainText(selectedName);
+    await expect(page).toHaveURL(/cart\.html/);
+    await expect(page.locator('.cart_item .inventory_item_name')).toHaveText(selectedName);
     await expect(page.locator('.cart_item')).toHaveCount(1);
-  });
+});
+
 });
